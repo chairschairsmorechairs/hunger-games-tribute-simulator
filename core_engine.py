@@ -1,4 +1,5 @@
 import random
+print('Welcome to the Hunger Games Tribute Simulator!')
 tributes = []
 death_messages = [
     ' slipped on wet moss while running and snapped pronoun neck.',
@@ -79,13 +80,17 @@ def game_one():
 #first user input** check pyscript
 number_of_tributes = int(input('Enter the number of tributes: ')) 
 
+#decides if the tribute goes to cornucopia or runs away
+for tribute in tributes:
+    None #here do stuff wher i left off
+
 #checks if the tribute is alive and location.
 for tribute in tributes:
     if tribute["status"] == "alive":
         if tribute["place"] == "cornucopia":
             None#bloodbath code         ***blood bath effect/background screen***
         elif tribute["place"] == "volcano":
-            None#find weapons code  different directions or no? different volcano stuff??
+            None# find weapons code different directions or no? different volcano stuff??
     else:
-        None #remove from dict?
+        None # how to remove from dict? 
     
