@@ -21,6 +21,8 @@ death_messages = [
     ' tried to battle name_2 and failed miserably, only managing to splatter a single item on them before dying.', #replace item
     ' became allergic to the air and died.'
     ' literally just died.'
+    ' died from looking at name_2, who was chopped.' # meaning?
+
     ]
 
 night_messages = [
@@ -63,10 +65,16 @@ def find_tribute(name):
 def num_tributes(number):                                #tribute list
     for tribute in range(number):
         name = input('Tribute Name: ')
-        tribute = {"name": "Kaitlyn", "gender": "f", "weapons": ["none", "none"], "health": "full", "place": "n/a", "items": ["none", "none"], "status": "alive",}
+        tribute = {"name": "Kaitlyn", "gender": "f", "weapons": ["none", "none"], "health": "full", "place": "n/a", "items": ["none", "none"], "status": "alive", "kills": "0",}
         
         tributes.append(tribute)
     return tributes
+
+#track the number of kills a tribute has
+def add_to_kills(tribute_name)
+    tribute_name["kills"] = int(tribute_name["kills"]) + 1 #can i just have no string in the dict itself? should I bother creating self, self.x etc??? check this out lol
+    return tribute_name["kills"]
+    
 
 #randomly select death message (and variables)
 def select_death_message(tribute):
@@ -126,6 +134,7 @@ def bloodbath():
             tributes.append(tribute)
             find_name = tribute[tribute]["name"]
             output_ = select_death_message(find_name) + output_ #here
+# remove from dict
                 
 
 
