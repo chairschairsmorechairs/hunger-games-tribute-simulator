@@ -21,7 +21,7 @@ death_messages = [
     ' tried to battle name_2 and failed miserably, only managing to splatter a single item on them before dying.', #replace item
     ' became allergic to the air and died.',
     ' literally just died.',
-    ' died from looking at name_2, who was chopped.' # meaning?
+    ' died from looking at name_2, who was chopped.', # meaning?
 
     ]
 
