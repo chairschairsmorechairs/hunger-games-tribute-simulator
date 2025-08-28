@@ -21,6 +21,8 @@ death_messages = [
     ' tried to battle name_2 and failed miserably, only managing to splatter a single item on them before dying.', #replace item
     ' became allergic to the air and died.',
     ' literally just died.',
+    ' died from looking at name_2, who was chopped.' # meaning?
+
     ]
 
 #night messages etc
@@ -70,7 +72,7 @@ def find_tribute(name):
 def num_tributes(number):                                #tribute list
     for tribute in range(number):
         name = input('Tribute Name: ')
-        tribute = {"name": "Kaitlyn", "gender": "f", "weapons": ["none", "none"], "health": "full", "place": "n/a", "items": ["none", "none"], "status": "alive",}
+        tribute = {"name": "Kaitlyn", "gender": "f", "weapons": ["none", "none"], "health": "full", "place": "n/a", "items": ["none", "none"], "status": "alive", "kills": "0",}
         
         tributes.append(tribute)
     return tributes
@@ -133,6 +135,7 @@ def bloodbath():
             tributes.append(tribute) # not sure about this
             find_name = tribute[tribute]["name"]
             output_ = select_death_message(find_name) + output_ #here
+# remove from dict
                 
 
 
