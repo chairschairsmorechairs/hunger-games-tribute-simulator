@@ -19,10 +19,11 @@ death_messages = [
     ' lost all pronoun aura. ', #idk bout this one
     ' died in shock after losing the huzz.',
     ' tried to battle name_2 and failed miserably, only managing to splatter a single item on them before dying.', #replace item
-    ' became allergic to the air and died.'
-    ' literally just died.'
+    ' became allergic to the air and died.',
+    ' literally just died.',
     ]
 
+#night messages etc
 night_messages = [
     ' found a convenient log to sleep in decision', 
     ' kept watch all night. Paranoid much?',
@@ -32,12 +33,14 @@ night_messages = [
     ' found a square hole in the ground and decision', #not done' #group similar ones?
 ]
 
+#alliance messages, add more, run chance, what is the chance they get an alliance
 alliance_messages = [
 	' formed an alliance with name_2.',
 	' asked to form an alliance with name_2, but was declined and lost aura.',
-	''
+	' agreed to ally with name_2, even though pronoun_2 was crazy.', #add pronoun 2, add 2 decisions.
 ]
 
+#do i need this?
 near_death_messages = [
     ' was almost run over by a stray Pinnochio but escaped by a hair.',
     ' found poisonous berries, decision.'
@@ -48,9 +51,13 @@ it_was_coming_death_messages = [ #can i add this to death messages?
     ' was killed by poisonous berries.',
     ' impaled pronoun on weapon' #in their possession
     ' was betrayed by name_2 and killed under the cover of darkness.',
-    
+    ' , out of desperation, took a bite out of name_2, and ran away.', #only if they had an alliance
 ]
 
+#chances they fight etc
+fight_messages = [
+    ' started beefing with name_2 over a cob of corn verdict',
+]
 
 #find tribute from their name (no strings involved)
 def find_tribute(name):
@@ -123,7 +130,7 @@ def bloodbath():
         if chance >= 3:
             tribute = tribute[tribute]["health"] = "none"
             tribute = tribute[tribute]["status"] = "dead"
-            tributes.append(tribute)
+            tributes.append(tribute) # not sure about this
             find_name = tribute[tribute]["name"]
             output_ = select_death_message(find_name) + output_ #here
                 
@@ -136,15 +143,15 @@ number_of_tributes = int(input('Enter the number of tributes: ')) #change input
 #decides if the tribute goes to cornucopia or runs away
 def choose_location():
     for tribute in tributes:
-        None #here do stuff wher i left off
+        None #here do stuff where i left off
         chance = random.randint(2, 6)
         if chance >= 4:
-            tribute["place"] = "cornucopia"
+            tribute["place"] = "cornucopia" 
         else:
             tribute["place"] = "volcano" #add more places??
 
 #checks if the tribute is alive and location.
-def bloodbath():                            #call after choose location !!!! very important!!!
+def bloodbath():                            #call after choose location !!!! very important!!! 
     for tribute in tributes:
         if tribute["status"] == "alive":
             if tribute["place"] == "cornucopia":
@@ -156,9 +163,14 @@ def bloodbath():                            #call after choose location !!!! ver
 
 def day_one():
     None #yet
-    choose_location() #reverse cornucopia
+    choose_location() #reverse cornucopia, make them find items as well
+    bloodbath()
+    #food? 
+
+
 
 def day_miscellaneous():
+    choose_location() #not cornucopia
 
     None #yet
 
@@ -192,13 +204,13 @@ def find_winner():
 
 #randomiser core engine, place all code in here later
 def one_game():
-    choose_location() #possibly change locations so they are variables idk why commit no work
-    bloodbath()
     day_one()
-    while one_left == False: #can i put brackets here?
+    while one_left() == False: #can i put brackets here? check this please
         None #day/night cycle
         night()
         day_miscellaneous()
+        one_left()
+    print('Would you like to play again?') # make a button
     #fix this and complete cycle
     
     
