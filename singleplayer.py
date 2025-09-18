@@ -1,0 +1,225 @@
+#import js document
+#ask for name and gender
+import random
+import core_engine
+tributes = []
+def log_event(message: str): 
+    #output_div = document.getElementById("output")
+    #output_div.innerHTML += f"<p>{message}</p>"
+    pass  # placeholder until you add code
+
+
+#def user_info(): 
+    #name = input('What is your full name? ')
+    #gender = input('What is your gender (m/f)? ')
+    #input name and gender
+    #return name, gender  # return so other functions can use it
+
+district_industries = {
+    1: "Luxury goods",
+    2: "Masonry / Military",
+    3: "Technology",
+    4: "Fishing",
+    5: "Power and Electricity",
+    6: "Transportation",
+    7: "Lumber",
+    8: "Textiles",
+    9: "Grain",
+    10: "Livestock",
+    11: "Agriculture",
+    12: "Coal",
+}
+
+def create_user(): 
+    #randomly generate name, gender, age, skills, district, family, personality
+    name = input('What is your full name? ')
+    gender = input('What is your gender (m/f)? ')
+    #choose district
+    district = random.randint(1,12)
+    #choose age (12-18)
+    age = random.randint(12, 18)
+    #choose skills
+    if district in [1, 2, 4]:
+            skill = random.choice(['agility', 'target practice', 'strength', 'adaptability', 'observation', 'fencing', 'agility'])
+    else:
+        skill = random.choice(['foraging', 'hunting', 'none', 'charisma', 'strength', 'adaptability', 'observation'])
+    #choose family 
+    family = random.randint(0, 2)
+    if family == 0: 
+        family = 'orphan'
+    elif family == 1:
+        family = random.choice(['mother', 'father'])
+    elif family == 2:
+        family = random.choices(['mother', 'father', 'brother', 'sister'], weights=[2, 2, 1, 1], k=2)
+    #choose personality
+    popularity = random.randint(20, 60)
+    if district == 12 and skill != 'charisma':
+        popularity -= 5
+    #add other factors ***************************************************
+    #choose money
+    money = random.randint(0, 10)
+    if district == 12:
+        money -= 2
+    if money < 0:
+        money = 0
+    return name, gender, district, age, skill, family, popularity, money
+    
+def reaping(name, gender, district, age, skill, family, popularity, money, year): 
+    industry = district_industries[district]
+    if district == 12:
+        capitol_rep = "Effie Trinket"
+    else:
+        capitol_rep = "a pink haired woman with an atrociously yellow pinafore"
+    print('It is the day of the reaping.')
+    if age == 12:
+        print(f'You, {name}, are 12 years old. This is the first year you have had the "opportunity" to participate in the reaping.')
+        
+    else:
+        print(f'You, {name}, are {age} years old. You have participated in the reaping before, but have never been chosen.')
+    
+    
+    print(f'You belong to district {district}, known for its {industry}.')
+    if district not in [1, 2, 4]:
+            print('You know that your chances of being chosen are quite low, but you can\'t help but feel a little nervous this year.')
+            print('Another house was burnt down this morning. It feels like a bad omen , especially on this day.' \
+            'The Capitol is sending us a message./')
+            print("As you leave the house, you look back. You can't help but feel like this time will be your last.")
+            if family != "orphan":
+                print(f'"Are you ready to go yet?" {family[0]} asks.')
+                print("'Yeah, I guess so,' you reply.")
+                print("And with that, you head to the town square.")
+    print("It's already packed when you arrive, with people squeezed in like sardines.")
+    print(f"As {capitol_rep} steps onto the stage, the crowd falls silent. She announces the {year}the Hunger Games once again.")
+    print(f'The audience holds their breath as she pulls a name from the glass bowl.')
+    print(f'"{name}. You have been selected to participate in the {year}th Hunger Games."')
+    if int(popularity) < 30:
+        print("The capitol representative smiles at you, but it's not a nice one. " \
+        "Your father had a scandalous reputation, and it only occurs to you now that she may have been one of the victims.")
+    elif int(popularity) >= 45:
+        print("A murmur rises in the crowd.")
+        print("Everyone looks at you in pity")
+    if age < 14 and family != "orphan" and district != [1, 2, 4]:
+        print(f"You clutch your {family[0]}'s hand, trying not to think about the future ahead.")
+    else:
+        print('You ball your hands into fists.')
+        print('Clearly, the Capitol has it in for you. First your father, and now you.')
+        print('A cold clear resolve begins to rise to the surface in your mind.')
+    if district in [1, 2, 4]:
+        rando = random_name(gender)
+        print(f'You share a glance with {rando}, whose face contorts with anger.')
+        print(f"Clearly, {find_pronoun_only(gender)} wasn't expecting you to be chosen.")
+        print(f"{rando} scoffs, swiping a finger across their neck as if to say, “Dead already.”")
+        print(f"You simply smirk back, confident in your ability.")
+    elif district not in [1, 2, 4]:
+        if "mother" in family or "sister" in family:
+            print(f'You look back at your {family[0]}, who is crying silently.')
+        print("People are crying")
+    print("You will survive, no matter the cost. " \
+    "And if you can take some Capitol scum down with you, so be it.")
+
+def find_pronoun_only(gender):
+    if gender == "f":
+        return "she"
+    else:
+        return "he"
+
+
+def random_name(gender):
+    #random first name
+    if gender == "f":
+        random_name = random.choice(['Alice', 'Beth', 'Cathy', 'Diana', 'Eva', 'Fiona', 'Grace', 'Hannah', 'Ivy', 'Jade', 'Kara', 'Luna', 'Mia', 'Nina', 'Olivia', 'Piper', 'Quinn', 'Riley', 'Sophie', 'Tina', 'Uma', 'Vera', 'Wendy', 'Xena', 'Yara', 'Zoe'])
+    else:
+        random_name = random.choice(['Alex', 'Ben', 'Chris', 'David', 'Evan', 'Frank', 'George', 'Harry', 'Ian', 'Jack', 'Kyle', 'Liam', 'Mike', 'Nate', 'Owen', 'Paul', 'Quinn', 'Ryan', 'Sam', 'Tom', 'Umar', 'Vince', 'Will', 'Xander', 'Yusuf', 'Zack'])
+    return random_name
+
+def create_tributes(): 
+    global tributes  # use the global list
+    tributes.clear()  # optional: clear existing tributes if rerunning
+
+    for i in range(23):
+        # generate a random name & gender
+        gender = random.choice(['m', 'f'])
+        name = random_name(gender)
+
+        # district (1–12)
+        district = random.randint(1, 12)
+
+        # age (12–18)
+        age = random.randint(12, 18)
+
+        # skills
+        if district in [1, 2, 4]:
+            skill = random.choice(['agility', 'target practice', 'strength', 'adaptability', 'observation', 'fencing', 'agility']) #k = 2
+        else:
+            skill = random.choice(['foraging', 'hunting', 'none', 'charisma', 'strength', 'adaptability', 'observation'])
+        # family
+        family = random.randint(0, 2)
+        if family == 0:
+            family = 'orphan'
+        elif family == 1:
+            family = random.choice(['mother', 'father'])
+        elif family == 2:
+            family = random.choices(['mother', 'father', 'brother', 'sister'], weights=[2, 2, 1, 1], k=2)
+
+        # popularity
+        popularity = random.randint(20, 60)
+        if district == 12 and skill != 'charisma':
+            popularity -= 5
+
+        # money
+        money = random.randint(0, 10)
+        if district == 12:
+            money -= 2
+        if money < 0:
+            money = 0
+
+        # add tribute to global list
+        tributes.append({
+            "name": name,
+            "gender": gender,
+            "district": district,
+            "age": age,
+            "skill": skill,
+            "family": family,
+            "popularity": popularity,
+            "money": money
+        })
+
+def choose_designer():
+    designers = ["Cinna", "Portia", "Mags", "Venia", "Flavius", "Octavia"] # weight magno more, get some randoms.
+    designer = random.choice(designers)
+    print(f'Your stylist is {designer}.')
+    if designer == "Cinna":
+        print("You feel a wave of relief wash over you. Cinna is known for his subtle defiance of the Capitol.")
+        print("With him by your side, you might just have a chance.")
+    elif designer == "Portia":
+        print("Portia is known for her elegant and sophisticated designs.")
+        print("She has a knack for making tributes look regal and poised.")
+    elif designer == "Mags":
+        print
+
+def first_game(): 
+    year = random.randint(2000, 4000)
+    name, gender, district, age, skill, family, popularity, money = create_user()
+    reaping(name, gender, district, age, skill, family, popularity, money, year)
+    create_tributes()
+    choose_designer()
+
+    #interviews!
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def main():
+    first_game()
