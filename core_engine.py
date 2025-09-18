@@ -176,7 +176,7 @@ def select_night_message(tribute):
 #selects close to death message
 def select_close_to_death_message(tribute):
     if tribute["name"] == tribute:
-         #add more code
+        #add more code
         message = random.choice(near_death_messages)
         output = find_pronoun(tribute, message)
         log_event(output)
