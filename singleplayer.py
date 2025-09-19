@@ -112,8 +112,8 @@ def reaping(name, gender, district, age, skill, family, popularity, money, year)
         print(f"You simply smirk back, confident in your ability.")
     elif district not in [1, 2, 4]:
         if "mother" in family or "sister" in family:
-            print(f'You look back at your {family[0]}, who is crying silently.')
-        print("People are crying")
+            print(f'You look back at your {family[0]}, who is crying silently.') #match to mother
+        print("The crowd parts as you make your way to the stage. They don't voice it, but they're all glad they didn't get chosen instead.")
     print("You will survive, no matter the cost. " \
     "And if you can take some Capitol scum down with you, so be it.")
 
@@ -186,30 +186,82 @@ def create_tributes():
         })
 
 def choose_designer():
-    designers = ["Cinna", "Portia", "Mags", "Venia", "Flavius", "Octavia"] # weight magno more, get some randoms.
-    designer = random.choice(designers)
+    #change for district 12 and change chance of getting district 12
+    designers = ["Cinna", "Portia", "Effie Trinket", "Tigris Snow", "Magno Stift"] # weight magno more, get some randoms.
+    weights = [3, 2, 1, 1, 5]  # Example weights to favor certain designers
+    designer = random.choices(designers, weights=weights, k=1)[0]#what is [0] for
     print(f'Your stylist is {designer}.')
     if designer == "Cinna":
         print("You feel a wave of relief wash over you. Cinna is known for his subtle defiance of the Capitol.")
-        print("With him by your side, you might just have a chance.")
+        print("With him by your side, you might just have a chance.")# not relief, confusion
     elif designer == "Portia":
         print("Portia is known for her elegant and sophisticated designs.")
         print("She has a knack for making tributes look regal and poised.")
-    elif designer == "Mags":
+    elif designer == "Effie Trinket":
         print
+
+def randomise_designers():
+    designers = ["Cinna", "Portia", "Venia", "Flavius", "Octavia", "Mags", "Darius", "Livia"] #fix
+    weights = [5, 3, 2, 2, 2, 1, 1, 1]  # Example weights to favor certain designers
+    designer = random.choices(designers, weights=weights, k=1)[0]
+    return designer
+
+
+def dying_chance(tribute, chance):
+    roll = random.randint(1, 100)
+    if roll <= chance:
+        return True  # Tribute dies
+    else:
+        return False  # Tribute survives
+
+def intermission():
+    print("There is a chance you can improve your stats before the games beging. Begin? (y/n): ") #BUTTON_ one of skills or something completely different (dancing), ask for aim
+
+
+
 
 def first_game(): 
     year = random.randint(2000, 4000)
     name, gender, district, age, skill, family, popularity, money = create_user()
     reaping(name, gender, district, age, skill, family, popularity, money, year)
     create_tributes()
+    #train
+    #intermission
+    #ask for designer? You are worried that you will get Magno Stift, who dresses the tributes in coal miner outfits every year.
     choose_designer()
-
+    randomise_designers()
+    choose_mentor()
+    #chance to kill mentor (you die)
+    training() #in training, if popularity is low, chance of planting bombs 50% success rate; if success attempt to escape, 33% chance
+    performance() #
+    ranking() #out of 24
+    intermission() # call in
     #interviews!
-    
+    interview_choice() #choose image
+    live_interview() #increase popularity, ask why they should be supported
+    #final intermission (dinner) #poision someone else, 25% success rate.
+    morning_chance() #breakfast, alliance last chance with district
+    #start game
+    #chance of type of arena
+    #generate and describe location
+    #choose run away or no, or grab item (choose which one), add clue (cornucopia)
+    #bloodbath , work on FIGHT CODE, how much chance of fighting/alliance 
+    #first night
+    #chance of sponsor
+    #day 2 (forage? chance of bumpong into someone, make fire? where shelter? chance of madness if kills > 3)
+    #night 2 and feast, make something enticing for thing #if madness, see things. 75% chance of hallucination (new function later?)
+    #sponsor definite
+    # day 3 (while player = alive) if kills >3, hasn't followed hallucination, 50% chance of hallucination, else no more.
+    #die function
+    #win function and announce winner
+    #play again? and stats
+
+    #random events 
+    #core_engine.select_death_message(), night msg, etc.
 
 
 
+#covey mode, backstory add way later
 
 
 
