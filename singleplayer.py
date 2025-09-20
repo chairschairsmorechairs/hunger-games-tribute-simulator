@@ -213,10 +213,80 @@ def dying_chance(tribute, chance):
         return True  # Tribute dies
     else:
         return False  # Tribute survives
-
+inter.called = False
 def intermission():
-    print("There is a chance you can improve your stats before the games beging. Begin? (y/n): ") #BUTTON_ one of skills or something completely different (dancing), ask for aim
+    choice = input("There is a chance you can improve your stats before the games beging. Begin? (y/n): ") 
+    #BUTTON_ one of skills or something completely different (dancing), ask for aim ***************************
+    if choice.lower() == 'y':
+        if inter.called == False: #this means it can 
+            inter.called = True
 
+        print("You chose to improve your stats. This feature is under development.")
+        pass
+    pass
+    inter.called = True
+############################################
+def choose_mentor(district):
+mentors = { 
+    1: ["Gloss", "Cashmere", "Augustus Braun"],
+    2: ["Brutus", "Lyme", "Enobaria"],
+    3: ["Beetee", "Wiress"],
+    4: ["Mags Flanagan", "Finnick Odair", "Annie Cresta"],
+    5: ["Porter Millicent Trip", "Joulie Joltez", "James Logan", "Nolan"], #james = alcoholic , nolan = made up (nothing)
+    6: ["Brutus", "Cecelia"],
+    7: ["Thresh", "Seeder"],
+    8: ["Woof", "Cecelia"],  # example, you can adjust
+    9: ["Chaff", "Seeder"],
+    10: ["Cecelia", "Seeder"],
+    11: ["Rue", "Thresh"],
+    # 12 handled separately
+}
+
+# Full victor pool
+all_victors = [
+    "Haymitch Abernathy",
+    "Finnick Odair",
+    "Cato",
+    "Clove",
+    "Beetee",
+    "Wiress",
+    "Mags",
+    "Johanna Mason",
+    "Enobaria",
+    "Brutus",
+    "Cashmere",
+    "Thresh",
+    "Rue",
+    "Marvel",
+    "Gloss",
+    "Chaff",
+    "Seeder",
+    "Cecelia",
+    "Tigris Snow",
+    "Katniss Everdeen",
+    "Peeta Mellark",
+    "Annie Cresta",
+    "Cinna",
+    "Effie Trinket"
+]
+
+# Matching weights (higher = more likely)
+weights = [
+    10 if name == "Haymitch Abernathy" else 1  # Haymitch boosted
+    for name in all_victors
+]
+
+def get_mentor(district):
+    if district == 12:
+        mentor = random.choices(all_victors, weights=weights, k=1)[0]
+    elif district in mentors:
+        mentor = random.choice(mentors[district])
+    else:
+        mentor = "nonexistent"  # fallback
+    
+    print(f"District {district}, your mentor is {mentor}.")
+    
+    return mentor
 
 
 
@@ -228,11 +298,11 @@ def first_game():
     #train
     #intermission
     #ask for designer? You are worried that you will get Magno Stift, who dresses the tributes in coal miner outfits every year.
-    choose_designer()
+    choose_designer(gender)
     randomise_designers()
-    choose_mentor()
+    mentor = choose_mentor(district) #use mentor
     #chance to kill mentor (you die)
-    training() #in training, if popularity is low, chance of planting bombs 50% success rate; if success attempt to escape, 33% chance
+    training() #in training, if popularity is low, chance of planting bombs 50% success rate; if success attempt to escape, 33% chance. intermission called in training too.
     performance() #
     ranking() #out of 24
     intermission() # call in
@@ -258,10 +328,10 @@ def first_game():
 
     #random events 
     #core_engine.select_death_message(), night msg, etc.
+    #win = mentor
 
 
-
-#covey mode, backstory add way later
+#covey mode, backstory add way later; healer; escort(capitol)
 
 
 
