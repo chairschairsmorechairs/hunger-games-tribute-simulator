@@ -65,7 +65,7 @@ def create_user():
     return name, gender, district, age, skill, family, popularity, money
     
 def reaping(name, gender, district, age, skill, family, popularity, money, year): 
-    industry = district_industries[district]
+    industry = district_industries[district].lower()
     if district == 12:
         capitol_rep = "Effie Trinket"
     else:
@@ -73,11 +73,8 @@ def reaping(name, gender, district, age, skill, family, popularity, money, year)
     print('It is the day of the reaping.')
     if age == 12:
         print(f'You, {name}, are 12 years old. This is the first year you have had the "opportunity" to participate in the reaping.')
-        
     else:
         print(f'You, {name}, are {age} years old. You have participated in the reaping before, but have never been chosen.')
-    
-    
     print(f'You belong to district {district}, known for its {industry}.')
     if district not in [1, 2, 4]:
             print('You know that your chances of being chosen are quite low, but you can\'t help but feel a little nervous this year.')
@@ -149,7 +146,7 @@ def create_tributes():
 
         # skills
         if district in [1, 2, 4]:
-            skill = random.choice(['agility', 'target practice', 'strength', 'adaptability', 'observation', 'fencing', 'agility']) #k = 2
+            skill = random.choice(['agility', 'target practice', 'strength', 'adaptability', 'observation', 'fencing']) #k = 2
         else:
             skill = random.choice(['foraging', 'hunting', 'none', 'charisma', 'strength', 'adaptability', 'observation'])
         # family
@@ -185,6 +182,23 @@ def create_tributes():
             "money": money
         })
 
+def train(district): #forcibly taken parameter
+    if district in [1, 2, 4]:
+        #print("luxurious train station")
+        if district not in [1, 2, 4]:
+            #print("You wake to the sound of the television blaring.") (only if forcibly taken)
+            print("Your fellow tribute and you sit in silence for quite some time, watching the scenery, perhaps pondering your imminent doom...")
+            print("You decide to break the silence. As if on cue, the television lights up, a gadget you have never seen before. At least, not at this size")
+            print("The sound is too small and tinny for you to make out, but you turn to your district partner")
+            print(f"In a fair impression of the weater presenter, you say 'Uhhh it's gonna be a little overcast in District 5 today, with some sunshine on the east side in District {district}.")
+            print("A great day to do some starving or maybe catch up on your 'prepping to send your child to die' time!'")
+        #calculate rivalry chance 
+        #attempt to ally query
+        #chance of alliance
+        return alliance
+    else:
+        pass
+
 def choose_designer():
     #change for district 12 and change chance of getting district 12
     designers = ["Cinna", "Portia", "Effie Trinket", "Tigris Snow", "Magno Stift"] # weight magno more, get some randoms.
@@ -198,7 +212,7 @@ def choose_designer():
         print("Portia is known for her elegant and sophisticated designs.")
         print("She has a knack for making tributes look regal and poised.")
     elif designer == "Effie Trinket":
-        print
+        print()
 
 def randomise_designers():
     designers = ["Cinna", "Portia", "Venia", "Flavius", "Octavia", "Mags", "Darius", "Livia"] #fix
@@ -226,57 +240,48 @@ def intermission():
     pass
     inter.called = True
 ############################################
-def choose_mentor(district):
-mentors = { 
-    1: ["Gloss", "Cashmere", "Augustus Braun"],
-    2: ["Brutus", "Lyme", "Enobaria"],
-    3: ["Beetee", "Wiress"],
-    4: ["Mags Flanagan", "Finnick Odair", "Annie Cresta"],
-    5: ["Porter Millicent Trip", "Joulie Joltez", "James Logan", "Nolan"], #james = alcoholic , nolan = made up (nothing)
-    6: ["Brutus", "Cecelia"],
-    7: ["Thresh", "Seeder"],
-    8: ["Woof", "Cecelia"],  # example, you can adjust
-    9: ["Chaff", "Seeder"],
-    10: ["Cecelia", "Seeder"],
-    11: ["Rue", "Thresh"],
-    # 12 handled separately
-}
+def choose_mentor(district): #find names for mentors
+    mentors = { 
+        1: ["Gloss", "Cashmere", "Augustus Braun"],
+        2: ["Brutus", "Lyme", "Enobaria"],
+        3: ["Beetee", "Wiress"],
+        4: ["Mags Flanagan", "Finnick Odair", "Annie Cresta"],
+        5: ["Porter Millicent Trip", "James Logan", "Nyra"], #james = alcoholic , nolan n Nyra = made up (nothing)
+        6: ["n", "idk"], #morphlings
+        7: ["Blight", "Johanna Mason"],
+        8: ["Woof", "Cecelia"],  # cecelia is semi canon
+        9: ["Nolan", "Sylva Mayleaf"], #unnamed male
+        10: ["idkk", "idf"],
+        11: ["Seeder", "Chaff"],
+        # 12 handled separately
+    }
 
-# Full victor pool
-all_victors = [
-    "Haymitch Abernathy",
-    "Finnick Odair",
-    "Cato",
-    "Clove",
-    "Beetee",
-    "Wiress",
-    "Mags",
-    "Johanna Mason",
-    "Enobaria",
-    "Brutus",
-    "Cashmere",
-    "Thresh",
-    "Rue",
-    "Marvel",
-    "Gloss",
-    "Chaff",
-    "Seeder",
-    "Cecelia",
-    "Tigris Snow",
-    "Katniss Everdeen",
-    "Peeta Mellark",
-    "Annie Cresta",
-    "Cinna",
-    "Effie Trinket"
-]
+    # Full victor pool
+    all_victors = [
+        "Haymitch Abernathy",
+        "Beetee",
+        "Wiress",
+        "Mags Flanagan",
+        "Chaff",
+        "Seeder",
+        "Cecelia",
+        "Annie Cresta",
+        "James Logan",
+        "Nyra",
+        "Porter Millicent Trip",
+        "Augustus Braun",
+        "Blight",
+        "Woof",
+        "Sylva Mayleaf",
+        "Nolan", #unnamed district 9 victor
+    ]
 
-# Matching weights (higher = more likely)
-weights = [
-    10 if name == "Haymitch Abernathy" else 1  # Haymitch boosted
-    for name in all_victors
-]
+    # Matching weights (higher = more likely)
+    weights = [
+        10 if name == "Haymitch Abernathy" else 1  # Haymitch boosted
+        for name in all_victors
+    ]
 
-def get_mentor(district):
     if district == 12:
         mentor = random.choices(all_victors, weights=weights, k=1)[0]
     elif district in mentors:
@@ -288,20 +293,42 @@ def get_mentor(district):
     
     return mentor
 
+def kill_mentor(district):
+    if district in [1, 2, 4]:
+        return False, 0
+    else:
+        answer = input('Would you like to hatch a plot to secretly kill your mentor? (y/n): ')
+        if answer.lower() == "y":
+            chance = random.randint(1, 4)
+            if chance == 1:
+                return True, 1
+            return True, 0
 
+
+def training(kill_mentor):
+    #select 3 skills to train, 
+    #randomly generate options
+    #if kill_mentor = true
+    #
+    pass
 
 def first_game(): 
     year = random.randint(2000, 4000)
     name, gender, district, age, skill, family, popularity, money = create_user()
     reaping(name, gender, district, age, skill, family, popularity, money, year)
     create_tributes()
-    #train
+    #print(tributes) debug
+    train(district)  #unfinished
+    #print(train(district))
     #intermission
     #ask for designer? You are worried that you will get Magno Stift, who dresses the tributes in coal miner outfits every year.
-    choose_designer(gender)
-    randomise_designers()
+    designer = choose_designer(gender) #unfinished
+    randomise_designers() #unfinished
+    #parade()
     mentor = choose_mentor(district) #use mentor
-    #chance to kill mentor (you die)
+    rebellion_bool, success_chance = kill_mentor(district)
+
+    #chance to kill mentor (you die) if not in 124. 75%
     training() #in training, if popularity is low, chance of planting bombs 50% success rate; if success attempt to escape, 33% chance. intermission called in training too.
     performance() #
     ranking() #out of 24
@@ -309,7 +336,7 @@ def first_game():
     #interviews!
     interview_choice() #choose image
     live_interview() #increase popularity, ask why they should be supported
-    #final intermission (dinner) #poision someone else, 25% success rate.
+    #final intermission (dinner) #poision someone else, 25% success rate. unlock secret path , rebel, lucy gray baird?**
     morning_chance() #breakfast, alliance last chance with district
     #start game
     #chance of type of arena
@@ -329,11 +356,12 @@ def first_game():
     #random events 
     #core_engine.select_death_message(), night msg, etc.
     #win = mentor
+    #victoryparade()
 
 
 #covey mode, backstory add way later; healer; escort(capitol)
 
-
+#district 13 mode, survival or backstory
 
 
 
