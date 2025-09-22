@@ -192,11 +192,15 @@ def train(district): #forcibly taken parameter
             print("The sound is too small and tinny for you to make out, but you turn to your district partner")
             print(f"In a fair impression of the weater presenter, you say 'Uhhh it's gonna be a little overcast in District 5 today, with some sunshine on the east side in District {district}.")
             print("A great day to do some starving or maybe catch up on your 'prepping to send your child to die' time!'")
-        #calculate rivalry chance 
+            #
+        #calculate rivlry chance 
         #attempt to ally query
         #chance of alliance
+        alliance = random.randint(1, 4)
         return alliance
     else:
+        #career alliance
+
         pass
 
 def choose_designer():
@@ -215,9 +219,10 @@ def choose_designer():
         print()
 
 def randomise_designers():
-    designers = ["Cinna", "Portia", "Venia", "Flavius", "Octavia", "Mags", "Darius", "Livia"] #fix
+    designers = ["Cinna", "Portia", "Proserpina Trinket", "Tigris Snow", "Magno Stift"] #fix*****************
     weights = [5, 3, 2, 2, 2, 1, 1, 1]  # Example weights to favor certain designers
     designer = random.choices(designers, weights=weights, k=1)[0]
+    #tributes 
     return designer
 
 
@@ -305,12 +310,24 @@ def kill_mentor(district):
             return True, 0
 
 
-def training(kill_mentor):
+def training(kill_mentor, chance, mentor, popularity):
     #select 3 skills to train, 
     #randomly generate options
     #if kill_mentor = true
     #
-    pass
+    if kill_mentor == True:
+        print(f"How would you like to attempt to kill your mentor, {mentor}?")
+        #add options
+    if popularity < 50:
+        chance = random.randint(1, 3)
+        if chance > 1:
+            #success
+            pass
+        else:
+            pass #fail
+    #option 1 for day 1.
+
+
 
 def first_game(): 
     year = random.randint(2000, 4000)
@@ -329,7 +346,7 @@ def first_game():
     rebellion_bool, success_chance = kill_mentor(district)
 
     #chance to kill mentor (you die) if not in 124. 75%
-    training() #in training, if popularity is low, chance of planting bombs 50% success rate; if success attempt to escape, 33% chance. intermission called in training too.
+    training(rebellion_bool, success_chance, mentor, popularity) #in training, if popularity is low, chance of planting bombs 50% success rate; if success attempt to escape, 33% chance. intermission called in training too.
     performance() #
     ranking() #out of 24
     intermission() # call in
@@ -341,6 +358,7 @@ def first_game():
     #start game
     #chance of type of arena
     #generate and describe location
+    generate_arena()
     #choose run away or no, or grab item (choose which one), add clue (cornucopia)
     #bloodbath , work on FIGHT CODE, how much chance of fighting/alliance 
     #first night
