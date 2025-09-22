@@ -312,16 +312,23 @@ def kill_mentor(district):
 
 def training(kill_mentor, chance, mentor, popularity):
     #select 3 skills to train, 
+    skills_list = ["Target practice", "Archery", "Electricity generation", "Spear crafting", "Foraging", "Swordfighting", "Camouflage", "Water sourcing and sanitation", "Traps and tricks"]
     #randomly generate options
     #if kill_mentor = true
     #
     if kill_mentor == True:
-        print(f"How would you like to attempt to kill your mentor, {mentor}?")
+        method = input(f"How would you like to attempt to kill your mentor, {mentor}?")
+        if method in ["poison", "gunshot", "fatal head wound", "strangle", "trap"]
+        print("This is a viable method.")
         #add options
+    if first_skill.lower() = "traps and tricks" or first_skill lower() = "electricity generation":
+        other = input('Would you also like to plant some bombs? (y/n): ')
     if popularity < 50:
         chance = random.randint(1, 3)
-        if chance > 1:
+        if chance > 2:
             #success
+            print("The bombs successfully exploded, injuring 3 fellow tributes and one of their mentors.")
+            print("The Capitol have decided to interview you. Proceed")
             pass
         else:
             pass #fail
