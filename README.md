@@ -11,3 +11,5 @@ Note: yes this has definitely been done before, but I wanted to try out somethin
 
 also trying to prove that ai can't quite take coding yet. not that vibe coding doesn't already exist xD
 
+edit: never going to be finished btw! go stalk someone else hahahhaha
+
